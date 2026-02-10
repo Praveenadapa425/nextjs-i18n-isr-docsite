@@ -1,4 +1,7 @@
 import "./globals.css";
+import Sidebar from "../components/Sidebar";
+import LanguageSwitcher from "../components/LanguageSwitcher";
+import VersionSelector from "../components/VersionSelector";
 
 export const metadata = {
   title: "Docs Portal",
@@ -22,9 +25,8 @@ export default function RootLayout({
           <h2 className="font-bold text-lg mb-4">
             Docs
           </h2>
-          <p className="text-sm text-gray-500">
-            Sidebar placeholder
-          </p>
+
+          <Sidebar locale="en" version="v1" />
         </aside>
 
         {/* Main Area */}
@@ -37,10 +39,11 @@ export default function RootLayout({
             </span>
 
             <div className="flex gap-4">
-              {/* Language Switcher Placeholder */}
-              <div data-testid="language-switcher">
-                🌐
-              </div>
+              {/* Language Switcher */}
+              <LanguageSwitcher />
+              
+              {/* Version Selector */}
+              <VersionSelector />
 
               {/* Theme Toggle Placeholder */}
               <button data-testid="theme-toggle">

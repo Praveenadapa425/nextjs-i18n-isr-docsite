@@ -2,32 +2,29 @@ import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
 import { notFound } from "next/navigation";
-// Custom markdown parser
+
+// Simple markdown to HTML converter
 function markdownToHtml(markdown: string): string {
-  let html = markdown;
-  
-  // Simple markdown conversion rules
-  const rules = [
+  return markdown
     // Headers
-    [/^### (.*$)/gm, '<h3>$1</h3>'],
-    [/^## (.*$)/gm, '<h2>$1</h2>'],
-    [/^# (.*$)/gm, '<h1>$1</h1>'],
+    .replace(/^### (.*$)/gim, '<h3>$1</h3>')
+    .replace(/^## (.*$)/gim, '<h2>$1</h2>')
+    .replace(/^# (.*$)/gim, '<h1>$1</h1>')
     // Bold and italic
-    [/\*\*(.*)\*\*/gim, '<strong>$1</strong>'],
-    [/\*(.*)\*/gim, '<em>$1</em>'],
-    // Code
-    [/```([\s\S]*?)```/gim, '<pre><code>$1</code></pre>'],
-    [/`(.*?)`/gim, '<code>$1</code>'],
+    .replace(/\*\*(.*)\*\*/gim, '<strong>$1</strong>')
+    .replace(/\*(.*)\*/gim, '<em>$1</em>')
+    // Code blocks
+    .replace(/```([\s\S]*?)```/gim, '<pre><code>$1</code></pre>')
+    .replace(/`(.*?)`/gim, '<code>$1</code>')
+    // Lists
+    .replace(/^\* (.*$)/gim, '<li>$1</li>')
+    .replace(/<\/li>\s*<li>/gim, '</li><li>')
     // Paragraphs
-    [/\n\n/g, '</p><p>'],
-  ];
-  
-  html = `<p>${html}</p>`;
-  for (const [pattern, replacement] of rules) {
-    html = html.replace(pattern, replacement as string);
-  }
-  
-  return html;
+    .replace(/\n\n/g, '</p><p>')
+    .replace(/^(?!<[h|p|u|o|l|c])/gim, '<p>')
+    .replace(/(?!<\/[h|p|u|o|l|c])$/gim, '</p>')
+    // Line breaks
+    .replace(/\n/g, '<br>');
 }
 
 type PageProps = {
@@ -42,11 +39,6 @@ export const revalidate = 60;
 
 export default async function DocPage({ params }: PageProps) {
   const { locale, version, slug } = await params;
-
-  // Validate that all required parameters are present
-  if (!locale || !version || !slug) {
-    notFound();
-  }
 
   const filePath = path.join(
     process.cwd(),
@@ -63,17 +55,13 @@ export default async function DocPage({ params }: PageProps) {
   const fileContent = fs.readFileSync(filePath, "utf-8");
   const { content, data } = matter(fileContent);
   
-  // Normalize line endings to prevent hydration mismatches
-  const normalizedContent = content.replace(/\r\n/g, '\n');
-  
   // Convert markdown to HTML
-  const htmlContent = markdownToHtml(normalizedContent);
+  const htmlContent = markdownToHtml(content);
 
   return (
     <article className="prose max-w-none">
-      {/* REQUIRED FOR AUTOMATED TESTS */}
       <div data-testid="doc-content">
-        <h1>{data.title || 'Documentation'}</h1>
+        <h1>{data.title}</h1>
         <div dangerouslySetInnerHTML={{ __html: htmlContent }} />
       </div>
     </article>
