@@ -38,14 +38,9 @@ export default function RootLayout({
               Header
             </span>
 
-            <div className="flex gap-4">
-              {/* Language Switcher */}
+            <div className="flex items-center gap-4">
               <LanguageSwitcher />
-              
-              {/* Version Selector */}
               <VersionSelector />
-
-              {/* Theme Toggle Placeholder */}
               <button data-testid="theme-toggle">
                 🌓
               </button>
