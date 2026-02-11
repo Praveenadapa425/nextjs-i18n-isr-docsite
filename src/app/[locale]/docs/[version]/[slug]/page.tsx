@@ -38,33 +38,65 @@ export default async function DocPage({ params }: PageProps) {
   const fileContent = fs.readFileSync(filePath, "utf-8");
   const { content, data } = matter(fileContent);
 
+  // Extract headings for table of contents
+  const headings = content
+    .split("\n")
+    .filter((line) => line.startsWith("##"))
+    .map((line) => line.replace("## ", ""));
+
   return (
-    <article className="prose prose-sm max-w-none prose-p:my-2 prose-h1:mb-4 prose-h2:mb-3 prose-pre:my-3">
-      <div data-testid="doc-content">
-        <h1>{data.title}</h1>
-        <MDXRemote
-          source={content}
-          components={{
-            pre: ({ children }: PreProps) => {
-              // Simple approach: try to extract text content
-              let codeText = '';
-              if (React.isValidElement(children)) {
-                const props = children.props as { children?: string };
-                codeText = props.children || '';
-              } else if (typeof children === 'string') {
-                codeText = children;
-              }
-              
-              return (
-                <div data-testid="code-block" className="relative">
-                  {children}
-                  <CopyButton text={codeText} />
-                </div>
-              );
-            },
-          }}
-        />
-      </div>
-    </article>
+    <div className="flex">
+      {/* Table of Contents */}
+      <aside data-testid="table-of-contents" className="w-64 pr-8">
+        {headings.map((h) => (
+          <a
+            key={h}
+            href={`#${h.toLowerCase().replace(/\s+/g, "-")}`}
+            data-testid={`toc-link-${h.toLowerCase().replace(/\s+/g, "-")}`}
+            className="block text-sm py-1 hover:text-blue-600"
+          >
+            {h}
+          </a>
+        ))}
+      </aside>
+
+      {/* Main Content */}
+      <article className="prose prose-sm max-w-none prose-p:my-2 prose-h1:mb-4 prose-h2:mb-3 prose-pre:my-3 flex-1">
+        <div data-testid="doc-content">
+          <h1>{data.title}</h1>
+          <MDXRemote
+            source={content}
+            components={{
+              h2: ({ children }: { children: React.ReactNode }) => {
+                const text = String(children);
+                const id = text.toLowerCase().replace(/\s+/g, "-");
+                return (
+                  <h2 id={id} className="scroll-mt-20">
+                    {children}
+                  </h2>
+                );
+              },
+              pre: ({ children }: PreProps) => {
+                // Simple approach: try to extract text content
+                let codeText = '';
+                if (React.isValidElement(children)) {
+                  const props = children.props as { children?: string };
+                  codeText = props.children || '';
+                } else if (typeof children === 'string') {
+                  codeText = children;
+                }
+                
+                return (
+                  <div data-testid="code-block" className="relative">
+                    {children}
+                    <CopyButton text={codeText} />
+                  </div>
+                );
+              },
+            }}
+          />
+        </div>
+      </article>
+    </div>
   );
 }
