@@ -59,7 +59,7 @@ export default async function DocPage({ params }: PageProps) {
   const htmlContent = markdownToHtml(content);
 
   return (
-    <article className="prose max-w-none">
+    <article className="prose prose-sm max-w-none prose-p:my-2 prose-h1:mb-4 prose-h2:mb-3 prose-pre:my-3">
       <div data-testid="doc-content">
         <h1>{data.title}</h1>
         <div dangerouslySetInnerHTML={{ __html: htmlContent }} />
