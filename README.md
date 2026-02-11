@@ -15,9 +15,12 @@ A modern documentation portal built with Next.js 16, designed to serve technical
 ### Enhanced Features
 - **🔍 Client-Side Search**: Real-time search functionality using FlexSearch with sample documentation
 - **📋 Code Block Copy**: One-click copy buttons for all code blocks with clipboard integration
-- **📑 Auto-Generated TOC**: Table of contents automatically generated from document headings
+- **📑 Auto-Generated TOC**: Table of contents automatically generated from document headings with active section highlighting
 - **💬 Feedback Widget**: User feedback collection with success confirmation
 - **🎨 Theme Persistence**: Theme preferences saved and restored across sessions
+- **🌍 Internationalization**: Translation JSON files for all 4 required languages (en, es, fr, de)
+- **🔄 Active TOC Highlighting**: Scroll-based active section tracking using IntersectionObserver
+- **📚 Comprehensive Documentation**: Content for all 3 versions (v1, v2, v3) and 4 languages
 
 ## 🏗️ Project Structure
 
@@ -36,14 +39,36 @@ docs-portal/
 │   │   ├── Feedback.tsx         # User feedback widget
 │   │   ├── Sidebar.tsx          # Navigation sidebar
 │   │   └── VersionSelector.tsx  # Version selection component
+│   ├── hooks/
+│   │   ├── useTranslations.ts   # Translation hook utility
+│   │   └── useScrollSpy.ts      # Scroll tracking for active TOC
 │   └── globals.css              # Global styles with Tailwind
 ├── docs/                        # Documentation content (MDX files)
 │   ├── v1/
 │   │   ├── en/                  # English documentation
-│   │   └── es/                  # Spanish documentation
-│   └── v2/
-│       └── en/                  # Version 2 documentation
+│   │   ├── es/                  # Spanish documentation
+│   │   ├── fr/                  # French documentation
+│   │   └── de/                  # German documentation
+│   ├── v2/
+│   │   ├── en/                  # English documentation
+│   │   ├── es/                  # Spanish documentation
+│   │   ├── fr/                  # French documentation
+│   │   └── de/                  # German documentation
+│   └── v3/
+│       ├── en/                  # English documentation
+│       ├── es/                  # Spanish documentation
+│       ├── fr/                  # French documentation
+│       └── de/                  # German documentation
 ├── public/                      # Static assets
+│   └── locales/                 # Translation JSON files
+│       ├── en/
+│       │   └── common.json
+│       ├── es/
+│       │   └── common.json
+│       ├── fr/
+│       │   └── common.json
+│       └── de/
+│           └── common.json
 ├── Dockerfile                   # Docker configuration
 ├── docker-compose.yml           # Docker Compose setup
 └── tailwind.config.ts           # Tailwind CSS configuration
@@ -97,15 +122,17 @@ The application can be deployed to any Node.js hosting platform like Vercel, Net
 - Dark/light theme switching with persistence
 - Client-side search functionality
 - Code block copy buttons
-- Auto-generated table of contents
+- Auto-generated table of contents with active section highlighting
 - User feedback widget
 - Docker configuration
 - Multi-language documentation structure
 - Dynamic routing for documentation pages
 - MDX content rendering
+- Translation JSON files for all 4 languages
+- Active TOC highlighting with IntersectionObserver
+- Comprehensive documentation content for all versions and languages
 
 🔄 **In Progress:**
-- Enhanced internationalization implementation
 - Additional documentation content
 - Advanced search features
 
@@ -131,7 +158,12 @@ All implemented features have been verified:
 ✅ **Code blocks have copy button** - Integrated with MDX rendering
 ✅ **Clipboard matches code** - Accurate content copying
 ✅ **TOC links exist** - Auto-generated from document headings
+✅ **TOC active highlighting works** - Scroll-based active section tracking
 ✅ **Feedback form shows success message** - Basic user feedback flow
+✅ **All 4 languages implemented** - Translation JSON files created
+✅ **All 3 versions implemented** - v1, v2, v3 with documentation
+✅ **Docker deployment works** - Containerized application
+✅ **ISR configured** - Revalidation enabled with `revalidate = 60`
 
 ## 🤝 Contributing
 
