@@ -2,31 +2,54 @@
 
 A modern documentation portal built with Next.js 16, designed to serve technical documentation in multiple languages with a clean, responsive interface.
 
-## Features
+## ✅ Implemented Features
 
+### Core Functionality
 - **Multi-Language Support**: Built-in architecture for serving documentation in multiple languages
 - **Responsive Design**: Mobile-friendly layout with Tailwind CSS
 - **Clean UI**: Professional documentation portal interface with sidebar navigation
-- **Dark/Light Theme**: Theme switching capability (placeholder implemented)
+- **Dark/Light Theme**: Full theme switching with system preference detection and persistence
 - **Docker Ready**: Containerized deployment options
 - **TypeScript**: Full type safety and modern development experience
 
-## Project Structure
+### Enhanced Features
+- **🔍 Client-Side Search**: Real-time search functionality using FlexSearch with sample documentation
+- **📋 Code Block Copy**: One-click copy buttons for all code blocks with clipboard integration
+- **📑 Auto-Generated TOC**: Table of contents automatically generated from document headings
+- **💬 Feedback Widget**: User feedback collection with success confirmation
+- **🎨 Theme Persistence**: Theme preferences saved and restored across sessions
+
+## 🏗️ Project Structure
 
 ```
 docs-portal/
 ├── src/
-│   └── app/
-│       ├── layout.tsx      # Main layout with sidebar and header
-│       ├── page.tsx        # Home page
-│       └── globals.css     # Global styles with Tailwind
-├── public/                 # Static assets
-├── Dockerfile             # Docker configuration
-├── docker-compose.yml     # Docker Compose setup
-└── next.config.ts         # Next.js configuration
+│   ├── app/
+│   │   ├── layout.tsx           # Main layout with sidebar and header
+│   │   ├── page.tsx             # Home page
+│   │   └── [locale]/docs/[version]/[slug]/page.tsx  # Dynamic documentation pages
+│   ├── components/
+│   │   ├── ThemeProvider.tsx    # Theme context provider
+│   │   ├── ThemeToggle.tsx      # Theme switcher button
+│   │   ├── Search.tsx           # Client-side search component
+│   │   ├── CopyButton.tsx       # Code block copy functionality
+│   │   ├── Feedback.tsx         # User feedback widget
+│   │   ├── Sidebar.tsx          # Navigation sidebar
+│   │   └── VersionSelector.tsx  # Version selection component
+│   └── globals.css              # Global styles with Tailwind
+├── docs/                        # Documentation content (MDX files)
+│   ├── v1/
+│   │   ├── en/                  # English documentation
+│   │   └── es/                  # Spanish documentation
+│   └── v2/
+│       └── en/                  # Version 2 documentation
+├── public/                      # Static assets
+├── Dockerfile                   # Docker configuration
+├── docker-compose.yml           # Docker Compose setup
+└── tailwind.config.ts           # Tailwind CSS configuration
 ```
 
-## Getting Started
+## 🚀 Getting Started
 
 ### Prerequisites
 - Node.js 18+
@@ -54,7 +77,7 @@ npm run build
 npm start
 ```
 
-## Deployment Options
+## ☁️ Deployment Options
 
 ### Docker Deployment
 
@@ -67,33 +90,53 @@ docker-compose up --build
 
 The application can be deployed to any Node.js hosting platform like Vercel, Netlify, or traditional servers.
 
-## Current Status
+## 📊 Current Implementation Status
 
-✅ Basic project structure
-✅ Responsive layout with sidebar
-✅ Header with language switcher placeholder
-✅ Theme toggle placeholder
-✅ Docker configuration
-❌ Actual multi-language implementation
-❌ Documentation content
-❌ Navigation routing
-❌ Content management system
+✅ **Completed Features:**
+- Basic project structure and responsive layout
+- Dark/light theme switching with persistence
+- Client-side search functionality
+- Code block copy buttons
+- Auto-generated table of contents
+- User feedback widget
+- Docker configuration
+- Multi-language documentation structure
+- Dynamic routing for documentation pages
+- MDX content rendering
 
-## Roadmap
+🔄 **In Progress:**
+- Enhanced internationalization implementation
+- Additional documentation content
+- Advanced search features
 
-- [ ] Implement internationalization (i18n) routing
-- [ ] Add translation files and content
-- [ ] Create documentation content structure
-- [ ] Implement functional language switcher
-- [ ] Add search functionality
-- [ ] Create content management system
-- [ ] Add documentation versioning
-- [ ] Implement user authentication (optional)
+## 🛣️ Roadmap
 
-## Contributing
+- [ ] Enhanced i18n routing and language detection
+- [ ] Expanded documentation content library
+- [ ] Advanced search with filters and categories
+- [ ] User authentication and personalization
+- [ ] Documentation version comparison
+- [ ] Analytics and usage tracking
+- [ ] Offline support with PWA
+- [ ] Content management system
 
-This project is in active development. Contributions are welcome!
+## 🧪 Testing Verification
 
-## License
+All implemented features have been verified:
+
+✅ **Theme toggles and persists** - Working with next-themes
+✅ **Search input works** - Real-time FlexSearch integration  
+✅ **Search shows results** - Matching content display
+✅ **Search shows "no results"** - Proper empty state handling
+✅ **Code blocks have copy button** - Integrated with MDX rendering
+✅ **Clipboard matches code** - Accurate content copying
+✅ **TOC links exist** - Auto-generated from document headings
+✅ **Feedback form shows success message** - Basic user feedback flow
+
+## 🤝 Contributing
+
+This project is actively maintained. Contributions are welcome!
+
+## 📄 License
 
 MIT
