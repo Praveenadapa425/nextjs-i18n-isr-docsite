@@ -2,6 +2,7 @@
 
 import { useEffect, useState, useRef } from "react";
 import { Index } from "flexsearch";
+import { useTranslations } from "../hooks/useTranslations";
 
 interface Doc {
   title: string;
@@ -12,6 +13,7 @@ export default function Search({ docs }: { docs: Doc[] }) {
   const [query, setQuery] = useState("");
   const [results, setResults] = useState<string[]>([]);
   const indexRef = useRef<Index<string> | null>(null);
+  const { t } = useTranslations();
 
   useEffect(() => {
     indexRef.current = new Index({ tokenize: "forward" });
@@ -39,12 +41,12 @@ export default function Search({ docs }: { docs: Doc[] }) {
         value={query}
         onChange={(e) => handleSearch(e.target.value)}
         className="border p-1"
-        placeholder="Search..."
+        placeholder={`${t('search')}...`}
       />
 
       <div data-testid="search-results">
         {results.length === 0 && query && (
-          <p data-testid="search-no-results">No results found</p>
+          <p data-testid="search-no-results">{t('no_results_found')}</p>
         )}
         {results.map((r, i) => (
           <p key={i}>{r}</p>

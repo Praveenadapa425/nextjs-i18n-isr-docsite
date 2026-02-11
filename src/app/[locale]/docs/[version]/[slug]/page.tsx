@@ -43,7 +43,11 @@ export default async function DocPage({ params }: PageProps) {
   const headings = content
     .split("\n")
     .filter((line) => line.startsWith("##"))
-    .map((line) => line.replace("## ", ""));
+    .map((line) => line.replace("## ", ""))
+    .map((heading) => {
+      const id = heading.toLowerCase().replace(/\s+/g, "-");
+      return { text: heading, id };
+    });
 
   return (
     <div className="flex">
@@ -51,12 +55,13 @@ export default async function DocPage({ params }: PageProps) {
       <aside data-testid="table-of-contents" className="w-64 pr-8">
         {headings.map((h) => (
           <a
-            key={h}
-            href={`#${h.toLowerCase().replace(/\s+/g, "-")}`}
-            data-testid={`toc-link-${h.toLowerCase().replace(/\s+/g, "-")}`}
-            className="block text-sm py-1 hover:text-blue-600"
+            key={h.id}
+            href={`#${h.id}`}
+            data-testid={`toc-link-${h.id}`}
+            className="block text-sm py-1 hover:text-blue-600 toc-link"
+            data-heading-id={h.id}
           >
-            {h}
+            {h.text}
           </a>
         ))}
       </aside>
@@ -72,7 +77,7 @@ export default async function DocPage({ params }: PageProps) {
                 const text = String(children);
                 const id = text.toLowerCase().replace(/\s+/g, "-");
                 return (
-                  <h2 id={id} className="scroll-mt-20">
+                  <h2 id={id} className="scroll-mt-20 heading-element">
                     {children}
                   </h2>
                 );
@@ -99,6 +104,45 @@ export default async function DocPage({ params }: PageProps) {
           <Feedback />
         </div>
       </article>
+      
+      <script dangerouslySetInnerHTML={{ __html: `
+        (function() {
+          if (typeof window !== 'undefined') {
+            const observer = new IntersectionObserver(
+              (entries) => {
+                // Reset all TOC links
+                document.querySelectorAll('.toc-link').forEach(link => {
+                  link.removeAttribute('data-active');
+                });
+                
+                // Mark the active one
+                entries.forEach(entry => {
+                  if (entry.isIntersecting) {
+                    const activeLinkId = entry.target.getAttribute('id');
+                    const tocLink = document.querySelector(\`[data-heading-id="\${activeLinkId}"]\`);
+                    if (tocLink) {
+                      tocLink.setAttribute('data-active', 'true');
+                    }
+                  }
+                });
+              },
+              { threshold: 0.1, rootMargin: '0% 0% -80% 0%' }
+            );
+            
+            // Observe all heading elements
+            document.querySelectorAll('.heading-element').forEach(el => {
+              observer.observe(el);
+            });
+            
+            // Clean up on page change
+            window.addEventListener('beforeunload', () => {
+              document.querySelectorAll('.heading-element').forEach(el => {
+                observer.unobserve(el);
+              });
+            });
+          }
+        })();
+      `}} />
     </div>
   );
 }

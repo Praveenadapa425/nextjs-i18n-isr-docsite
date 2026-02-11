@@ -1,0 +1,346 @@
+Build a Next.js Multi-Language Documentation Site with ISR and i18n
+Mandatory Task
+
+Back
+Domain
+Frontend Development
+Skills
+API Integration
+Artificial Intelligence
+Frontend Development
+Management
+Incremental Static Regeneration (ISR)
+Internationalization (i18n)
+UI/UX Implementation
+Difficulty
+Intermediate
+Tools
+Docker
+Next.Js
+Node.Js
+React
+Tailwind CSS
+Algolia DocSearch
+next-themes
+Industries
+Software Development
+Pending Submission
+Please submit your work when ready.
+
+Time Remaining
+
+5d
+
+Deadline: 14 Feb 2026, 04:59 pm
+
+Overview
+Instructions
+Resources
+Submit
+Objective
+Build a high-performance, multi-language documentation portal using Next.js. You will learn to implement Incremental Static Regeneration (ISR) for fast and fresh content, internationalization (i18n) for global audiences, and integrate powerful tools like Algolia DocSearch and Swagger UI. This project is crucial for understanding modern web architectures that balance static site performance with dynamic content needs, a common requirement for product documentation and knowledge bases.
+
+
+
+Description
+Background
+Modern documentation portals are more than just static text, they are dynamic, interactive platforms that serve a global user base. Achieving this requires a sophisticated rendering strategy. Next.js offers a powerful solution with its hybrid rendering capabilities. Static Site Generation (SSG) provides excellent performance by pre-rendering pages at build time. Server-Side Rendering (SSR) is great for highly dynamic data but can be slower. Incremental Static Regeneration (ISR) offers a middle ground, allowing static pages to be regenerated in the background after a certain interval, ensuring content is both fast and up-to-date.
+Internationalization (ilen) is essential for reaching a global audience. Frameworks like st-118next simplify the process of managing translations and locale-based routing. Combined with features like full-text search (e.g., Algolia DocSearch), theme switching, and automated API reference generation from OpenAPI specs, you con build a professional, feature-rich documentation site that meets industry standards.
+This project will challenge you to integrate these technologies into a cohesive platform. You will make architectural decisions about data fetching, state management, and user experience, all within a containerized Docker environment for consistent development and deployment.
+Implementation Details
+Follow these steps to build the documentation portal. You are expected to structure your content and code in a logical manner.
+Step 1: Project Setup and Initial Layout
+Initialize a new Next.js project (App Router is recommended) and set up Tailwind CSS for styling. Create the main layout, including a header, a collapsible sidebar for navigation, and a main content area. The header should contain placeholders for a language switcher and theme toggle.
+Step 2: Containerization with Docker
+Create a Ducker-f11e for your Next.js application and a ducker-compose.yed to manage the service. This ensures your application can be run with a single command. See requirement docker-compose setup for the specific contract.
+Here is a template for your docker-compose.yel
+docker-compose.yel
+version: 3.8
+services:
+build
+context
+dochar Filei Dockerfile
+ports
+"3808 3800"
+environment
+Defins amvironment variables here or is a Fil
+NODE ERV-dove Σομπωτ
+The bealthchock ansures the container is ready before it's considered up
+healthcheck
+["CHO", "carl", "F", "http://localhost:38881
+Interval: 30%
+timeout 106
+roteles: 5
+start serindi s
+Also create a.env.example file to document all necessary environment variables. See requirement example-File.
+Step 3: Content Structure and ISR
+Create a directory (eg, ducs) to store your documentation content as Markdown files. Structure the files to represent different versions (v1, v2, v3) and languages (en, es, fr, de). Implement dynamic routes in Next.js to render these files. Use getStaticPrups with the revalidate option to enable ISR, ensuring pages are updated periodically without needing a full rebuild. See requirement is documentation-pages
+Step 4: Internationalization (118)
+Integrate est-118next (or a similar library) to handle translations. Create JSON translation files for Ul strings (like 'Search', Edit this page', etc.) for English, Spanish, French, and German. Implement locale-based routing (eg, /es/docs/vi/getting started). The language switcher in the header should update the URL to the corresponding locale See requirements 118 routing and language-switcher
+Step 5: Implement Core Ul Components
+Build the required Ul components, ensuring each has the specified data-testie attributes for automated testing:
+Sidebar Navigation: A collapsible list of documentation pages. (Ref: sidebar-navigation)
+Theme Switcher: A button to toggle between light and dark modes. (Ref thane switcher)
+Version Selector: A dropdown to switch between doc versions vl, v2, and v3. (Ref: version-salector)
+Code Blocks: Display code snippets with a copy-to-clipboard button. (Ref: code-block-copy)
+Table of Contents: Automatically generate a TOC for each page. (Ref: table-of-contants)
+Feedback Widget: A simple farm on each page for user feedback. (Ref: feedback widget)
+Step 6: Search Integration.
+Integrate a client-side search solution. You can use a service like Algolia DocSearch or a library like flexsearch. The search bar should be easily accessible, and results should be displayed clearly. See requirement full-text-search
+Step 7: API Reference Page
+Create a dedicated page (eg, ati-reference) to display your API documentation. Use swagger--react to render an OpenAPI specification file. You must include a sample openapi, json file in your project's public directory. See requirement api-refurunce-page-
+Submission Checklist
+Ensure your repository contains the following artifacts before submission:
+REAUME A comprehensive guide to your project, including setup, architecture, and a description of features.
+Dockerfile: A multi-stage Dockerfile to build and run the Next.js application.
+docker-compose.yel: A file to orchestrate the application container.
+env.example: A file documenting all required environment variables.
+All application source code.
+docs/directory with sample Markdown content for at least two languages and two versions.
+public/locales/ directory with translation files for all four required languages.
+public/oponap1.jsun: A somple OpenAPI 3.0 specification file.
+tests/ (Optional but recommended): A directory containing any unit or integration tests you have written.
+Implementation Guidelines
+These are advisory suggestions to help you build a robust and maintainable application. They are not strict requirements.
+State Management: For global state like the current theme or sidebar visibility, consider using React's Context API or a lightweight state management library like Zustand. This keeps your component logic clean and avoids prop drilling.
+State Management: For global state like the current theme or sidebar visibility, consider using React's Context API or a lightweight stote management library like Zustand. This keeps your component logic clean and avoids prop drilling.
+Component Abstraction: Create reusable components for elements like buttons, cards, and form inputs. This promotes consistency and makes future changes easier.
+For example, your 'Copy to clipboard button could be a generic Icon Button component
+Performance: While ISR helps, also consider other performance optimizations. Use next/age for optimized image loading and Font for font optimization. Analyze your client-side JavaScript bundle and consider code-splitting complex components that aren't needed on every page.
+Accessibility (ally): Use semantic HTML5 elements (char), sain, casides), Ensure interactive elements are keyboard-navigable and have proper ARIA attributes where necessary. The data-testia attributes required for this task are for testing, not a substitute for accessibility attributes like aria-label.
+Error Handling: Implement graceful error handling for data fetching. For the API reference page, what happens if the openapi, son fails to load? Display a user-friendly error message instead of a broken page.
+
+
+FAQ
+Q: Do I need a real backend or database?
+A: No. This is a frontend-focused task. All documentation content should come from local Markdown files, and the API reference from a static penapi.json file. The feedback widget does not need to actually submit data to a server, a client-side confirmation (eg, using react-hot-toast) is sufficient (Ref: Feedback-widget).
+Q: Can I use the Pages Router instead of the App Router?
+A: Yes, the App Router is recommended but not mandatory. The core requirements like ISR, ilßn, and dynamic routing can be implemented with either. Ensure your solution is robust and well-structured regardless of the router used.
+Q: Do I need to write the documentation content myself?
+A: No. You can use placeholder text (e.g. Lorem Ipsum) or generate content from an existing open-source project's documentation. The focus is on the platform's functionality, not the content itself. You should have enough content to demonstrate all features like versions, multiple languages, and code blocks.
+Q: Must I use Algolia DocSearch? What if I can't get an API key?
+A: No. Algolia DocSearch is a suggestion. If you cannot use it, implementing a client-side search with a library like Flexsearch.js is a perfectly valid alternative. The requirement is to have functional full-text search (Ref: Full-text-search).
+Q: How should the active section be highlighted in the Table of Contents?
+A: The active section should be highlighted based on the user's scroll position. You can use the IntersectionObserver API to track which heading is currently in the viewport and apply an active style to the corresponding TOC link (Ref: table-of-contents).
+Q: What should the Edit this page on GitHub' link do?
+A: It should link to the corresponding Markdown file in your source repository. The URL should be dynamically generated based on the current page's file path.
+
+Core Requirements
+1.
+The project must be containerized using Docker and manageable via a docker-compose.yml file at the root. The Docker setup should build the Next.js application and run it on port 3000.
+
+File Location: docker-compose.yml (repository root)
+
+Required Services:
+
+app: The Next.js application service.
+Requirements:
+
+The app service must expose port 3000.
+The app service must include a healthcheck that periodically checks if the application is responsive at http://localhost:3000.
+Verification:
+
+Run docker-compose up --build -d.
+Verify the app container starts and becomes healthy within 2 minutes.
+Verify the application is accessible via http://localhost:3000 on the host machine.
+2.
+A .env.example file must be present in the root of the repository, documenting all environment variables required for the application to run.
+
+File Location: .env.example (repository root)
+
+Required Content:
+
+All environment variables used by the application (e.g., NEXT_PUBLIC_API_URL, etc.).
+Each variable should have a placeholder or example value.
+Do not include real secrets.
+Verification:
+
+Check for the existence of the .env.example file.
+A script will copy this file to .env before running docker-compose up to ensure the application starts correctly.
+3.
+All documentation pages must be statically generated with Incremental Static Regeneration (ISR) enabled, with a revalidation period of 60 seconds.
+
+Route Pattern: /docs/v[1-3]/{slug} and its localized variants.
+
+Behavior:
+
+Pages should be pre-built at build time.
+After deployment, pages should be regenerated at most once every 60 seconds upon receiving a request.
+Verification:
+
+Make a GET request to a documentation page (e.g., /docs/v1/introduction).
+Verify the Cache-Control response header contains s-maxage=60 and stale-while-revalidate.
+4.
+The application must support internationalization for English (en), Spanish (es), French (fr), and German (de) using sub-path routing. Content should be rendered in the selected language.
+
+Locale Sub-paths:
+
+/en/docs/... (English)
+/es/docs/... (Spanish)
+/fr/docs/... (French)
+/de/docs/... (German)
+Content:
+
+The main content area of the documentation page, marked with data-testid="doc-content", must contain text in the language specified by the URL's locale.
+Verification:
+
+Request /es/docs/v1/introduction.
+Verify the response contains Spanish text within the element with data-testid="doc-content".
+Request /fr/docs/v1/introduction.
+Verify the response contains French text within the element with data-testid="doc-content".
+5.
+A language switcher component must be present in the UI to allow users to change the application's language.
+
+Element Identifier: data-testid="language-switcher"
+
+Behavior:
+
+The component should contain options/links for all 4 supported languages (en, es, fr, de).
+Clicking a language option should navigate the user to the same page but with the new locale sub-path in the URL.
+Verification:
+
+Use a testing tool to navigate to /en/docs/v1/introduction.
+Find the element with data-testid="language-switcher" and click the 'Español' (es) option.
+Verify the browser URL changes to /es/docs/v1/introduction.
+6.
+A collapsible sidebar must display navigation links for the documentation pages. Each link must have a unique data-testid.
+
+Element Identifiers:
+
+Sidebar container: data-testid="sidebar"
+Navigation links: data-testid="sidebar-nav-link-{slug}" (e.g., sidebar-nav-link-introduction)
+Behavior:
+
+The sidebar should list links to documentation pages for the current version and language.
+Clicking a link navigates to the corresponding page.
+Verification:
+
+Navigate to a documentation page.
+Verify the element data-testid="sidebar" is visible.
+Verify that links with the format data-testid="sidebar-nav-link-{slug}" exist.
+Click a link and verify the URL changes to the correct page.
+7.
+A client-side full-text search functionality must be implemented, allowing users to search across all documentation content.
+
+Element Identifiers:
+
+Search input: data-testid="search-input"
+Search results container: data-testid="search-results"
+No results message: data-testid="search-no-results"
+Behavior:
+
+Typing a query in the search input should display relevant results in the results container.
+If no results are found, the 'no results' message should be displayed.
+Verification:
+
+Use a testing tool to locate data-testid="search-input".
+Type a known term from the documentation content.
+Verify that data-testid="search-results" becomes populated with result items.
+Type a gibberish query.
+Verify that data-testid="search-no-results" becomes visible.
+8.
+A dedicated page must render API documentation from an openapi.json file using swagger-ui-react.
+
+Route: /api-reference
+
+File Location: /public/openapi.json
+
+Behavior:
+
+The page at /api-reference should display the interactive Swagger UI.
+The Swagger UI must be rendered from the openapi.json file.
+Verification:
+
+Navigate to /api-reference.
+Verify that an element with the class .swagger-ui (the main container for the Swagger UI) is present in the DOM.
+9.
+A version selector must allow users to switch between different versions (v1, v2, v3) of the documentation.
+
+Element Identifiers:
+
+Version selector dropdown/button: data-testid="version-selector"
+Version option link: data-testid="version-option-v{number}" (e.g., version-option-v2)
+Behavior:
+
+Clicking on a version should navigate the user to the same page under the new version's path.
+Verification:
+
+Navigate to /en/docs/v1/introduction.
+Click data-testid="version-selector" to open the options.
+Click the element with data-testid="version-option-v2".
+Verify the browser URL changes to /en/docs/v2/introduction.
+10.
+The application must support a dark/light theme, toggleable via a UI button.
+
+Element Identifier:
+
+Theme toggle button: data-testid="theme-toggle"
+Behavior:
+
+The application should detect the user's system preference on first load.
+Clicking the toggle button should switch the theme and persist the choice (e.g., in localStorage).
+A class (e.g., dark) must be applied to the <html> element when dark mode is active.
+Verification:
+
+Use a testing tool to load the page.
+Get the initial class list of the <html> element.
+Find and click the element with data-testid="theme-toggle".
+Verify that the <html> element's class list now includes dark (if it was light) or does not include dark (if it was dark).
+11.
+Each documentation page must display a Table of Contents (TOC) that links to headings on the page and highlights the active section based on scroll position.
+
+Element Identifiers:
+
+TOC container: data-testid="table-of-contents"
+TOC link: data-testid="toc-link-{heading-slug}"
+Active TOC link: An active link must have a specific attribute or class, e.g., data-active="true".
+Behavior:
+
+The TOC should contain <a> tags with href attributes pointing to the ids of headings on the page.
+As the user scrolls, the corresponding TOC link for the visible section should be marked as active.
+Verification:
+
+Navigate to a documentation page with multiple headings.
+Verify the data-testid="table-of-contents" element exists.
+Verify it contains links with data-testid attributes matching the pattern toc-link-{slug}.
+Use a testing tool to scroll a specific heading into view.
+Verify that its corresponding TOC link element has the data-active="true" attribute.
+12.
+A feedback widget must be present on each documentation page, allowing users to submit feedback.
+
+Element Identifiers:
+
+Feedback text input/textarea: data-testid="feedback-input"
+Submit button: data-testid="feedback-submit"
+Success message container: data-testid="feedback-success-message"
+Behavior:
+
+The widget should contain at least a text input and a submit button.
+Upon submission, a success message should be displayed. The form does not need to send data to a real backend.
+Verification:
+
+Find the element with data-testid="feedback-input" and enter text.
+Click the element with data-testid="feedback-submit".
+Verify that the element with data-testid="feedback-success-message" becomes visible.
+13.
+All code blocks in the documentation must include a button to copy the code to the clipboard.
+
+Element Identifiers:
+
+Code block container: data-testid="code-block"
+Copy button: data-testid="copy-code-button"
+Behavior:
+
+Each code block should have a visible copy button.
+Clicking the button should copy the block's content to the user's clipboard.
+Verification:
+
+Navigate to a page with a code example.
+Verify that an element with data-testid="code-block" contains an element with data-testid="copy-code-button".
+Use a testing tool to click the button and then verify the content of the clipboard matches the code block's text.
+
+
+
+
+this is complete project description 
+so create me plan to complete in best way
