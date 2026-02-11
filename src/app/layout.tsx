@@ -4,6 +4,7 @@ import LanguageSwitcher from "../components/LanguageSwitcher";
 import VersionSelector from "../components/VersionSelector";
 import ThemeProvider from "../components/ThemeProvider";
 import ThemeToggle from "../components/ThemeToggle";
+import Search from "../components/Search";
 
 export const metadata = {
   title: "Docs Portal",
@@ -28,6 +29,12 @@ export default function RootLayout({
           <h2 className="font-bold text-lg mb-4">
             Docs
           </h2>
+
+          <Search docs={[
+            { title: "Introduction", content: "Welcome to the documentation portal. This is the English version of the documentation." },
+            { title: "Getting Started", content: "This project demonstrates incremental static regeneration, internationalization, and versioned documentation." },
+            { title: "Introducción", content: "Bienvenido al portal de documentación. Esta es la versión en español." }
+          ]} />
 
           <Sidebar locale="en" version="v1" />
         </aside>
