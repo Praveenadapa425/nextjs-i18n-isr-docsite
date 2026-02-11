@@ -4,6 +4,7 @@ import matter from "gray-matter";
 import { notFound } from "next/navigation";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import CopyButton from "../../../../../components/CopyButton";
+import Feedback from "../../../../../components/Feedback";
 import React from "react";
 
 interface PreProps {
@@ -95,6 +96,7 @@ export default async function DocPage({ params }: PageProps) {
               },
             }}
           />
+          <Feedback />
         </div>
       </article>
     </div>
