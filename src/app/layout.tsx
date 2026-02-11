@@ -2,6 +2,8 @@ import "./globals.css";
 import Sidebar from "../components/Sidebar";
 import LanguageSwitcher from "../components/LanguageSwitcher";
 import VersionSelector from "../components/VersionSelector";
+import ThemeProvider from "../components/ThemeProvider";
+import ThemeToggle from "../components/ThemeToggle";
 
 export const metadata = {
   title: "Docs Portal",
@@ -16,6 +18,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="flex h-screen bg-gray-50">
+        <ThemeProvider>
         
         {/* Sidebar */}
         <aside
@@ -41,9 +44,7 @@ export default function RootLayout({
             <div className="flex items-center gap-4">
               <LanguageSwitcher />
               <VersionSelector />
-              <button data-testid="theme-toggle">
-                🌓
-              </button>
+              <ThemeToggle />
             </div>
           </header>
 
@@ -53,6 +54,7 @@ export default function RootLayout({
           </main>
 
         </div>
+        </ThemeProvider>
       </body>
     </html>
   );
