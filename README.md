@@ -316,9 +316,9 @@ git commit -m "feat: add new feature"
 git push origin feature/new-feature
 ```
 
-## 📄 License
+<!-- ## 📄 License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details. -->
 
 ## 🙏 Acknowledgments
 
