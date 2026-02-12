@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import CopyButton from "../../../../../components/CopyButton";
 import Feedback from "../../../../../components/Feedback";
+import { useActiveSection } from "../../../../../hooks/useActiveSection";
 import React from "react";
 
 interface PreProps {
@@ -68,6 +69,10 @@ export default async function DocPage({ params }: PageProps) {
       return { text: heading, id };
     });
 
+  // Get active section using IntersectionObserver
+  const headingIds = headings.map(h => h.id);
+  const activeId = useActiveSection(headingIds);
+
   return (
     <div className="flex">
       {/* Table of Contents */}
@@ -77,8 +82,9 @@ export default async function DocPage({ params }: PageProps) {
             key={h.id}
             href={`#${h.id}`}
             data-testid={`toc-link-${h.id}`}
-            className="block text-sm py-1 hover:text-blue-600 toc-link"
+            className={`block text-sm py-1 hover:text-blue-600 toc-link ${activeId === h.id ? 'text-blue-600 font-semibold' : 'text-gray-700'}`}
             data-heading-id={h.id}
+            data-active={activeId === h.id ? 'true' : 'false'}
           >
             {h.text}
           </a>
