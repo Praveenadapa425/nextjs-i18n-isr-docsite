@@ -115,44 +115,7 @@ export default async function DocPage({ params }: PageProps) {
         </div>
       </article>
       
-      <script dangerouslySetInnerHTML={{ __html: `
-        (function() {
-          if (typeof window !== 'undefined') {
-            const observer = new IntersectionObserver(
-              (entries) => {
-                // Reset all TOC links
-                document.querySelectorAll('.toc-link').forEach(link => {
-                  link.removeAttribute('data-active');
-                });
-                
-                // Mark the active one
-                entries.forEach(entry => {
-                  if (entry.isIntersecting) {
-                    const activeLinkId = entry.target.getAttribute('id');
-                    const tocLink = document.querySelector(\`[data-heading-id="\${activeLinkId}"]\`);
-                    if (tocLink) {
-                      tocLink.setAttribute('data-active', 'true');
-                    }
-                  }
-                });
-              },
-              { threshold: 0.1, rootMargin: '0% 0% -80% 0%' }
-            );
-            
-            // Observe all heading elements
-            document.querySelectorAll('.heading-element').forEach(el => {
-              observer.observe(el);
-            });
-            
-            // Clean up on page change
-            window.addEventListener('beforeunload', () => {
-              document.querySelectorAll('.heading-element').forEach(el => {
-                observer.unobserve(el);
-              });
-            });
-          }
-        })();
-      `}} />
+      
     </div>
   );
 }
