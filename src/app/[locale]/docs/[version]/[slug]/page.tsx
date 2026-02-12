@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import CopyButton from "../../../../../components/CopyButton";
 import Feedback from "../../../../../components/Feedback";
+import ActiveTOC from "../../../../../components/ActiveTOC";
 import React from "react";
 
 interface PreProps {
@@ -68,27 +69,12 @@ export default async function DocPage({ params }: PageProps) {
       return { text: heading, id };
     });
 
-  // Get active section using IntersectionObserver
-  const headingIds = headings.map(h => h.id);
-  const activeId = useActiveSection(headingIds);
+  // Active section tracking will be handled by client component
 
   return (
     <div className="flex">
       {/* Table of Contents */}
-      <aside data-testid="table-of-contents" className="w-64 pr-8">
-        {headings.map((h) => (
-          <a
-            key={h.id}
-            href={`#${h.id}`}
-            data-testid={`toc-link-${h.id}`}
-            className={`block text-sm py-1 hover:text-blue-600 toc-link ${activeId === h.id ? 'text-blue-600 font-semibold' : 'text-gray-700'}`}
-            data-heading-id={h.id}
-            data-active={activeId === h.id ? 'true' : 'false'}
-          >
-            {h.text}
-          </a>
-        ))}
-      </aside>
+      <ActiveTOC headings={headings} />
 
       {/* Main Content */}
       <article className="prose prose-sm max-w-none prose-p:my-2 prose-h1:mb-4 prose-h2:mb-3 prose-pre:my-3 flex-1">
