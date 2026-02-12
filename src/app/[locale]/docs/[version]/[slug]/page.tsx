@@ -32,12 +32,31 @@ export default async function DocPage({ params }: PageProps) {
     `${slug}.mdx`
   );
 
-  if (!fs.existsSync(filePath)) {
+  // Validate route parameters to prevent path traversal
+  const isValidParam = (param: string) => {
+    return /^[a-zA-Z0-9\-_]+$/.test(param) && param.length <= 50;
+  };
+
+  if (!isValidParam(locale) || !isValidParam(version) || !isValidParam(slug)) {
     notFound();
   }
 
-  const fileContent = fs.readFileSync(filePath, "utf-8");
-  const { content, data } = matter(fileContent);
+  let content = '';
+  let data: { title?: string } = {};
+
+  try {
+    if (!fs.existsSync(filePath)) {
+      notFound();
+    }
+
+    const fileContent = fs.readFileSync(filePath, "utf-8");
+    const result = matter(fileContent);
+    content = result.content;
+    data = result.data;
+  } catch (error) {
+    console.error('Error reading documentation file:', error);
+    notFound();
+  }
 
   // Extract headings for table of contents
   const headings = content

@@ -6,6 +6,8 @@
   "theme": "Thème",
   "feedback": "Commentaires",
   "copy": "Copier",
+  "copy_code": "Copier le code dans le presse-papiers",
+  "submit_feedback": "Soumettre le feedback",
   "no_results_found": "Aucun résultat trouvé",
   "submit": "Soumettre",
   "leave_feedback": "Laissez un commentaire...",

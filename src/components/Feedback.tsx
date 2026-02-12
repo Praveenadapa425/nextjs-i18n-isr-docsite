@@ -13,12 +13,16 @@ export default function Feedback() {
         data-testid="feedback-input"
         className="border w-full p-2"
         placeholder={t('leave_feedback')}
+        aria-label={t('leave_feedback')}
+        rows={4}
       />
 
       <button
         data-testid="feedback-submit"
         onClick={() => setSubmitted(true)}
         className="border px-2 py-1 mt-2"
+        aria-label={t('submit_feedback') || 'Submit feedback'}
+        type="button"
       >
         {t('submit')}
       </button>

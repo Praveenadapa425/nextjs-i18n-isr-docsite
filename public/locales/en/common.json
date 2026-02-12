@@ -6,6 +6,8 @@
   "theme": "Theme",
   "feedback": "Feedback",
   "copy": "Copy",
+  "copy_code": "Copy code to clipboard",
+  "submit_feedback": "Submit feedback",
   "no_results_found": "No results found",
   "submit": "Submit",
   "leave_feedback": "Leave feedback...",

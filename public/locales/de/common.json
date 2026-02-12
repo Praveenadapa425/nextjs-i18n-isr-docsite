@@ -6,6 +6,8 @@
   "theme": "Design",
   "feedback": "Feedback",
   "copy": "Kopieren",
+  "copy_code": "Code in die Zwischenablage kopieren",
+  "submit_feedback": "Feedback senden",
   "no_results_found": "Keine Ergebnisse gefunden",
   "submit": "Senden",
   "leave_feedback": "Feedback hinterlassen...",
