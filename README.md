@@ -316,10 +316,6 @@ git commit -m "feat: add new feature"
 git push origin feature/new-feature
 ```
 
-<!-- ## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details. -->
-
 ## 🙏 Acknowledgments
 
 - [Next.js Team](https://nextjs.org) for the amazing framework
@@ -327,13 +323,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - [i18next](https://www.i18next.com) for internationalization
 - [FlexSearch](https://github.com/nextapps-de/flexsearch) for client-side search
 - [OpenAPI](https://www.openapis.org) for API documentation standards
-
-<!-- ## 📞 Support
-
-- **Documentation**: [Project Wiki](https://github.com/username/project/wiki)
-- **Issues**: [GitHub Issues](https://github.com/username/project/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/username/project/discussions)
-- **Email**: support@project.com -->
 
 ---
 
