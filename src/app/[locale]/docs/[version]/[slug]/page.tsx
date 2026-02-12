@@ -5,7 +5,6 @@ import { notFound } from "next/navigation";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import CopyButton from "../../../../../components/CopyButton";
 import Feedback from "../../../../../components/Feedback";
-import { useActiveSection } from "../../../../../hooks/useActiveSection";
 import React from "react";
 
 interface PreProps {
